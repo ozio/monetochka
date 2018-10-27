@@ -13,7 +13,7 @@ import monetochka from 'monetochka';
 
 monetochka.format({ value: 10, currency: 'USD' }); // $10.00
 monetochka.format({ value: 20000, currency: 'RUB' }); // 20 000,00 ₽
-monetochka.format({ value: 350590, currency: 'EUR', k: 2 }) // 350,6K € 
+monetochka.format({ value: 350590, currency: 'EUR', k: 1 }) // 350,6K € 
 ```
 
 ## License
