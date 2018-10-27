@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
+    "declaration": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
     "noUnusedParameters": true,
