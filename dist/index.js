@@ -1043,7 +1043,7 @@ var placeSeparators = function (value, precision, config) {
     return integerPart
         .replace(/\B(?=(\d{3})+(?!\d))/g, config.g) + (floatPart ? "" + config.d + floatPart : '');
 };
-var placeK = function (value, precision, config) {
+var placeSI = function (value, precision, config) {
     // Original code source:
     // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
     var si = [
@@ -1066,30 +1066,47 @@ var placeK = function (value, precision, config) {
         .replace(rx, '$1')
         .replace('.', config.d) + si[i].symbol;
 };
+exports.globalConfig = {
+    throwOnError: false,
+    errorValue: '—',
+};
 exports.format = function (_a) {
-    var value = _a.value, currency = _a.currency, precision = _a.precision, k = _a.k;
-    var symbol = symbols[currency] || currency;
-    var locale = defaultLocales[currency] || 'en_US';
-    var config;
-    if (locales[locale]) {
-        var l = locales[locale];
-        if (l.h) {
-            config = locales[l.h];
+    var value = _a.value, currency = _a.currency, precision = _a.precision, si = _a.si, locale = _a.locale;
+    try {
+        if (Number.isNaN(value)) {
+            return exports.globalConfig.errorValue;
+        }
+        var symbol = symbols[currency] || currency;
+        var selectedLocale = locale || exports.globalConfig.defaultLocale || defaultLocales[currency] || 'en_US';
+        var preset = void 0;
+        if (locales[selectedLocale]) {
+            var l = locales[selectedLocale];
+            if (l.h) {
+                preset = locales[l.h];
+            }
+            else {
+                preset = l;
+            }
+        }
+        var amount = void 0;
+        if (typeof si !== 'undefined') {
+            amount = placeSI(value, si, preset);
         }
         else {
-            config = l;
+            var pres = typeof precision !== 'undefined' ? precision : preset.p;
+            amount = placeSeparators(value, pres, preset);
+        }
+        return preset.t
+            .replace('!', symbol)
+            .replace('@', amount);
+    }
+    catch (e) {
+        if (exports.globalConfig.throwOnError) {
+            throw e;
+        }
+        else {
+            return exports.globalConfig.errorValue;
         }
     }
-    var amount;
-    if (typeof k !== 'undefined') {
-        amount = placeK(value, k, config);
-    }
-    else {
-        var pres = typeof precision !== 'undefined' ? precision : config.p;
-        amount = placeSeparators(value, pres, config);
-    }
-    return config.t
-        .replace('!', symbol)
-        .replace('@', amount);
 };
-exports.default = { format: exports.format };
+exports.default = { globalConfig: exports.globalConfig, format: exports.format };

@@ -1,4 +1,4 @@
-import { IMonetochkaConfig, IMonetochkaFormat, IMonetochkaProxyConfig } from '../index';
+import { IMonetochkaConfig, IMonetochkaFormat, IMonetochkaProxyConfig, IMonetochkaGlobalConfig } from '../index';
 
 // Original data source:
 // https://github.com/osrec/currencyFormatter.js
@@ -1054,7 +1054,7 @@ const placeSeparators = (
   ;
 };
 
-const placeK = (value: number, precision: number, config: IMonetochkaConfig): string => {
+const placeSI = (value: number, precision: number, config: IMonetochkaConfig): string => {
   // Original code source:
   // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
 
@@ -1081,35 +1081,52 @@ const placeK = (value: number, precision: number, config: IMonetochkaConfig): st
   ;
 };
 
-export const format = ({ value, currency, precision, k }: IMonetochkaFormat): string => {
-  const symbol = symbols[currency] || currency;
-  const locale = defaultLocales[currency] || 'en_US';
-
-  let config;
-
-  if (locales[locale]) {
-    let l: any = locales[locale];
-
-    if (l.h) {
-      config = locales[l.h]
-    } else {
-      config = l;
-    }
-  }
-
-  let amount;
-
-  if (typeof k !== 'undefined') {
-    amount = placeK(value, k, config);
-  } else {
-    const pres = typeof precision !== 'undefined' ? precision : config.p;
-    amount = placeSeparators(value, pres, config);
-  }
-
-  return config.t
-    .replace('!', symbol)
-    .replace('@', amount)
-  ;
+export const globalConfig: IMonetochkaGlobalConfig = {
+  throwOnError: false,
+  errorValue: '—',
 };
 
-export default { format };
+export const format = ({ value, currency, precision, si, locale }: IMonetochkaFormat): string => {
+  try {
+    if (Number.isNaN(value)) {
+      return globalConfig.errorValue;
+    }
+
+    const symbol = symbols[currency] || currency;
+    const selectedLocale = locale || globalConfig.defaultLocale || defaultLocales[currency] || 'en_US';
+
+    let preset;
+
+    if (locales[selectedLocale]) {
+      let l: any = locales[selectedLocale];
+
+      if (l.h) {
+        preset = locales[l.h]
+      } else {
+        preset = l;
+      }
+    }
+
+    let amount;
+
+    if (typeof si !== 'undefined') {
+      amount = placeSI(value, si, preset);
+    } else {
+      const pres = typeof precision !== 'undefined' ? precision : preset.p;
+      amount = placeSeparators(value, pres, preset);
+    }
+
+    return preset.t
+      .replace('!', symbol)
+      .replace('@', amount)
+    ;
+  } catch (e) {
+    if (globalConfig.throwOnError) {
+      throw e;
+    } else {
+      return globalConfig.errorValue;
+    }
+  }
+};
+
+export default { globalConfig, format };

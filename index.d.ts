@@ -2,7 +2,15 @@ export interface IMonetochkaFormat {
   value: number;
   currency: string;
   precision?: number;
-  k?: number;
+  si?: number;
+  locale?: string;
+  errorValue?: string;
+}
+
+export interface IMonetochkaGlobalConfig {
+  throwOnError: boolean;
+  errorValue: string;
+  defaultLocale?: string;
 }
 
 export interface IMonetochkaProxyConfig {
