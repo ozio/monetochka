@@ -1,7 +1,20 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 // Original data source:
 // https://github.com/osrec/currencyFormatter.js
+// Reworked following Wikipedia
+// Signs from http://www.fileformat.info/info/unicode/block/currency_symbols/list.htm
 var symbols = {
     AED: 'د.إ.‏',
     AFN: '؋',
@@ -10,54 +23,57 @@ var symbols = {
     ANG: 'Naf',
     AOA: 'Kz',
     ARS: '$',
-    AUD: '$',
+    AUD: 'A$',
     AWG: 'Afl.',
     AZN: '₼',
     BAM: 'KM',
-    BBD: '$',
+    BBD: 'Bds$',
+    BRB: '₢',
     BDT: '৳',
     BGN: 'лв.',
     BHD: 'د.ب.‏',
     BIF: 'FBu',
-    BMD: '$',
-    BND: '$',
+    BMD: 'BD$',
+    BND: 'B$',
     BOB: 'Bs',
     BRL: 'R$',
-    BSD: '$',
+    BSD: 'B$',
     BTN: 'Nu.',
     BWP: 'P',
     BYN: 'p.',
     BYR: 'р.',
-    BZD: '$',
-    CAD: '$',
+    BZD: 'BZ$',
+    CAD: 'C$',
     CDF: 'FC',
     CHF: 'CHF',
-    CLP: '$',
+    CLP: 'CLP$',
     CNY: '￥',
-    COP: '$',
+    COP: 'COL$',
     CRC: '₡',
-    CUC: '$',
-    CUP: '$',
+    CUC: 'CUC$',
+    CUP: '$MN',
     CVE: '​',
     CZK: 'Kč',
     DJF: 'Fdj',
     DKK: 'kr',
-    DOP: '$',
+    DOP: 'RD$',
     DZD: 'DA',
     EGP: '£',
     ERN: 'Nfk',
     ETB: 'Br',
     EUR: '€',
-    FJD: '$',
+    FJD: 'FJ$',
     FKP: '£',
+    FRF: '₣',
     GBP: '£',
     GEL: '₾',
     GHS: 'GH₵',
     GIP: '£',
     GMD: 'D',
     GNF: 'FG',
+    GRD: '₯',
     GTQ: 'Q',
-    GYD: '$',
+    GYD: 'G$',
     HKD: 'HK$',
     HNL: 'L',
     HRK: 'kn',
@@ -67,9 +83,10 @@ var symbols = {
     ILS: '₪',
     INR: '₹',
     IQD: 'د.ع.‏',
-    IRR: 'ریال',
+    IRR: '﷼',
     ISK: 'kr',
-    JMD: '$',
+    ITL: '£',
+    JMD: 'J$',
     JOD: 'د.أ.‏',
     JPY: '¥',
     KES: 'Ksh',
@@ -79,12 +96,12 @@ var symbols = {
     KPW: '₩',
     KRW: '₩',
     KWD: 'د.ك.‏',
-    KYD: '$',
+    KYD: 'CI$',
     KZT: '₸',
     LAK: '₭',
     LBP: 'L£',
     LKR: 'Rs',
-    LRD: '$',
+    LRD: 'L$',
     LSL: 'lLS',
     LYD: 'د.ل.‏',
     MAD: 'د.م.‏',
@@ -98,15 +115,15 @@ var symbols = {
     MRU: 'UM',
     MUR: 'Rs',
     MWK: 'MK',
-    MXN: '$',
+    MXN: 'Mex$',
     MYR: 'RM',
     MZN: 'MTn',
-    NAD: '$',
+    NAD: 'N$',
     NGN: '₦',
     NIO: 'C$',
     NOK: 'kr',
     Np: 'Rs',
-    NZD: '$',
+    NZD: 'NZ$',
     OMR: 'ر.ع.‏',
     PAB: 'B/.',
     PEN: 'S/.',
@@ -116,48 +133,50 @@ var symbols = {
     PLN: 'zł',
     PYG: '₲',
     QAR: 'ر.ق.‏',
+    RON: 'lei',
     RSD: 'дин.',
     RUB: '₽',
     RWF: 'RF',
     SAR: 'ر.س.‏',
-    SBD: '$',
+    SBD: 'SI$',
     SCR: 'SR',
     SDG: 'ج.س.',
     SEK: 'kr',
-    SGD: '$',
+    SGD: 'S$',
     SHP: '£',
     SLL: 'Le',
     SOS: 'S',
-    SRD: '$',
-    SSP: '£',
+    SRD: 'Sr$',
+    // SSP: '£', // no sign https://en.wikipedia.org/wiki/South_Sudanese_pound
     STD: 'Db',
     STN: 'Db',
-    SYP: '£',
+    SYP: '£S',
     SZL: 'E',
     THB: '฿',
     TMT: 'ТМТ',
     TND: 'DT',
     TOP: 'T$',
     TRY: '₺',
-    TTD: '$',
-    TWD: '$',
+    TTD: 'TT$',
+    TWD: 'NT$',
     TZS: 'TSh',
     UAH: '₴',
     UGX: 'USh',
     USD: '$',
-    UYU: '$',
+    UYU: 'N$',
     UZS: 'сўм',
     VEF: 'Bs',
     VND: '₫',
     VUV: 'VT',
     WST: 'WS$',
     XAF: 'FCFA',
-    XCD: '$',
+    XCD: 'EC$',
     XOF: 'CFA',
     XPF: 'CFP',
     YER: 'ر.ي.‏',
     ZAR: 'R',
-    ZMW: 'K'
+    ZMW: 'K',
+    BTC: '₿'
 };
 var defaultLocales = {
     AED: 'ar_AE',
@@ -225,6 +244,7 @@ var defaultLocales = {
     IQD: 'ar_IQ',
     IRR: 'fa_IR',
     ISK: 'is',
+    ITL: 'it',
     JMD: 'en_JM',
     JOD: 'ar_JO',
     JPY: 'ja',
@@ -1046,25 +1066,17 @@ var placeSeparators = function (value, precision, config) {
 var placeSI = function (value, precision, config) {
     // Original code source:
     // https://stackoverflow.com/questions/9461621/format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900
-    var si = [
-        { value: 1, symbol: '' },
-        { value: 1E3, symbol: 'K' },
-        { value: 1E6, symbol: 'M' },
-        { value: 1E9, symbol: 'G' },
-        { value: 1E12, symbol: 'T' },
-        { value: 1E15, symbol: 'P' },
-        { value: 1E18, symbol: 'E' }
-    ];
-    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-    var i;
-    for (i = si.length - 1; i > 0; i--) {
-        if (value >= si[i].value)
+    var units = ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+    var stringValue;
+    var decimal;
+    for (var i = units.length - 1; i >= 0; i--) {
+        decimal = Math.pow(1000, i + 1);
+        if (value <= -decimal || value >= decimal) {
+            stringValue = (value / decimal).toFixed(precision) + units[i];
             break;
+        }
     }
-    return (value / si[i].value)
-        .toFixed(precision)
-        .replace(rx, '$1')
-        .replace('.', config.d) + si[i].symbol;
+    return (stringValue ? stringValue : String(value)).replace('.', config.d);
 };
 exports.globalConfig = {
     throwOnError: false,
@@ -1073,8 +1085,9 @@ exports.globalConfig = {
 exports.format = function (_a) {
     var value = _a.value, currency = _a.currency, precision = _a.precision, si = _a.si, locale = _a.locale;
     try {
+        // @ts-ignore
         if (Number.isNaN(value)) {
-            return exports.globalConfig.errorValue;
+            throw new TypeError('Value is NaN');
         }
         var symbol = symbols[currency] || currency;
         var selectedLocale = locale || exports.globalConfig.defaultLocale || defaultLocales[currency] || 'en_US';
@@ -1089,7 +1102,7 @@ exports.format = function (_a) {
             }
         }
         var amount = void 0;
-        if (typeof si !== 'undefined') {
+        if (typeof si !== 'undefined' && value > 1000) {
             amount = placeSI(value, si, preset);
         }
         else {
@@ -1109,4 +1122,9 @@ exports.format = function (_a) {
         }
     }
 };
-exports.default = { globalConfig: exports.globalConfig, format: exports.format };
+exports.f = function (value, currency, parameters) {
+    if (parameters === void 0) { parameters = {}; }
+    return exports.format(__assign({ value: value,
+        currency: currency }, parameters));
+};
+exports.default = { globalConfig: exports.globalConfig, format: exports.format, f: exports.f };
