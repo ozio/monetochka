@@ -18,7 +18,7 @@ monetochka.format({ value: 350590, currency: 'EUR', si: 1 }); // 350,6K €
 monetochka.format({ value: 18.729361, currency: 'GBP', precision: 0 }); // £19
 
 // Simple format
-monetochka.f(15.241, 'SEK'); //
+monetochka.f(15.241, 'SEK'); // 15,24 kr
 ```
 
 #### Parameters:
