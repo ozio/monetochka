@@ -25,11 +25,11 @@ monetochka.f(15.241, 'SEK'); // 15,24 kr
 
 | Property    | Type   | Required | Description |
 | ----------- | ------ | :------: | ----------- |
-| `value`     | number | yes      |
-| `currency`  | string | yes      |
-| `precision` | number | no       | Digits after integer part.
-| `locale`    | string | no       | Locale currency format.
-| `si`        | number | no       | Enables SI-format thousands rounding (e.g. 10000 -> 10K) and define digits after integer part.
+| `value`     | `number` | yes      |
+| `currency`  | `string` | yes      |
+| `precision` | `number` | no       | Digits after integer part.
+| `locale`    | `string` | no       | Locale currency format.
+| `si`        | `number` | no       | Enables SI-format thousands rounding (e.g. 10000 -> 10K) and define digits after integer part.
 
 ### Global Configure
 
@@ -39,9 +39,9 @@ monetochka.globalConfig.throwOnError = true;
 
 | Property      | Type    | Default value |
 | ------------- | ------- | ------------- |
-| throwOnError  | boolean | false         |
-| errorValue    | string  | "—"           |
-| defaultLocale | string  | null          |
+| `throwOnError`  | `boolean` | false         |
+| `errorValue`    | `string`  | "—"           |
+| `defaultLocale` | `string`  | null          |
 
 ## Next steps
 
