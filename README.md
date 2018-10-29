@@ -19,6 +19,7 @@ monetochka.format({ value: 18.729361, currency: 'GBP', precision: 0 }); // £19
 
 // Simple format
 monetochka.f(15.241, 'SEK'); // 15,24 kr
+monetochka.f(18.729361, 'GBP', { precision: 0 }); // 15,24 kr
 ```
 
 #### Parameters:
@@ -39,15 +40,16 @@ monetochka.globalConfig.throwOnError = true;
 
 | Property      | Type    | Default value |
 | ------------- | ------- | ------------- |
-| `throwOnError`  | `boolean` | false         |
-| `errorValue`    | `string`  | "—"           |
-| `defaultLocale` | `string`  | null          |
+| `throwOnError`  | `boolean` | `false`         |
+| `errorValue`    | `string`  | `"—"`           |
+| `defaultLocale` | `string`  | `null`          |
 
 ## Next steps
 
 - [ ] Parameter for simple/extended currency symbols (e.g. `$` or `US$`), because a lot of currencies have several symbols;
 - [ ] Parameter for strict and loose precision (strict precision 2 should always returns `0.00` and not strict should be rounded to `0`). The same for si rounding;
 - [ ] Parameter for output only currency codes (e.g. `f(2000, 'RUB') -> 2 000 RUB`);
+- [ ] Format for negative values;
 - [ ] Method to add new currencies;
 - [ ] Method to manipulate si rounding chars (e.g. for i18n or `K` -> `k`);
 - [ ] Prepare code to be readed by a NORMAL programmers (refactoring, I mean);
