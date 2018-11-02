@@ -46,6 +46,7 @@ monetochka.globalConfig.throwOnError = true;
 
 ## Next steps
 
+- [ ] Separators format (thousands, lakh, wan);
 - [ ] Parameter for simple/extended currency symbols (e.g. `$` or `US$`), because a lot of currencies have several symbols;
 - [ ] Parameter for strict and loose precision (strict precision 2 should always returns `0.00` and not strict should be rounded to `0`). The same for si rounding;
 - [ ] Parameter for output only currency codes (e.g. `f(2000, 'RUB') -> 2 000 RUB`);

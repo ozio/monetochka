@@ -214,7 +214,7 @@ const defaultLocales: {[key: string]: string} = {
   EGP: 'ar_EG',
   ERN: 'ti_ER',
   ETB: 'am',
-  EUR: 'de',
+  EUR: 'en',
   FJD: 'en_FJ',
   FKP: 'en_FK',
   GBP: 'en',
