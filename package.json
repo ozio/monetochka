@@ -1,6 +1,6 @@
 {
   "name": "monetochka",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Simple, fast and zero-dependency currency formatting library",
   "main": "./dist/index.js",
   "scripts": {
