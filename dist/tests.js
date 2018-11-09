@@ -13,6 +13,7 @@ var testsItself = function (exp) {
     exp('50,6K kr', monetochka.format({ value: 50555, currency: 'SEK', si: 1 }));
     exp('₿1,000.00', monetochka.format({ value: 1000, currency: 'BTC' }));
     exp('₿-1,000.00', monetochka.format({ value: -1000, currency: 'BTC' }));
+    exp('BTC1,000', monetochka.format({ value: 12, currency: 'BTC', noSymbol: true, precision: 0 }));
     exp('-10 000,00 ₽', monetochka.format({ value: -10000, currency: 'RUB' }));
     exp('¥5,000', monetochka.format({ value: 5000.21, currency: 'JPY' }));
     exp('15,24 kr', monetochka.f(15.241, 'SEK'));

@@ -5,12 +5,14 @@ export interface IMonetochkaFormat {
   si?: number;
   locale?: string;
   errorValue?: string;
+  noSymbol?: boolean;
 }
 
 export interface IMonetochkaGlobalConfig {
   throwOnError: boolean;
   errorValue: string;
   defaultLocale?: string;
+  noSymbol?: boolean;
 }
 
 export interface IMonetochkaProxyConfig {

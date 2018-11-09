@@ -1090,14 +1090,14 @@ export const globalConfig: IMonetochkaGlobalConfig = {
   errorValue: '—',
 };
 
-export const format = ({ value, currency, precision, si, locale }: IMonetochkaFormat): string => {
+export const format = ({ value, currency, precision, si, locale, noSymbol }: IMonetochkaFormat): string => {
   try {
     // @ts-ignore
     if (Number.isNaN(value)) {
       throw new TypeError('Value is NaN');
     }
 
-    const symbol = symbols[currency] || currency;
+    const symbol = noSymbol ? currency : symbols[currency] || currency;
     const selectedLocale = locale || globalConfig.defaultLocale || defaultLocales[currency] || 'en_US';
 
     let preset;

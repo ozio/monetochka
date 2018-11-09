@@ -24,13 +24,14 @@ monetochka.f(18.729361, 'GBP', { precision: 0 }); // 15,24 kr
 
 #### Parameters:
 
-| Property    | Type   | Required | Description |
-| ----------- | ------ | :------: | ----------- |
-| `value`     | `number` | yes      |
-| `currency`  | `string` | yes      |
-| `precision` | `number` | no       | Digits after integer part.
-| `locale`    | `string` | no       | Locale currency format.
-| `si`        | `number` | no       | Enables SI-format thousands rounding (e.g. 10000 -> 10K) and define digits after integer part.
+| Property    | Type      | Required | Description |
+| ----------- | --------- | :------: | ----------- |
+| `value`     | `number`  | yes      |
+| `currency`  | `string`  | yes      |
+| `precision` | `number`  | no       | Digits after integer part.
+| `locale`    | `string`  | no       | Locale currency format.
+| `si`        | `number`  | no       | Enables SI-format thousands rounding (e.g. 10000 -> 10K) and define digits after integer part.
+| `noSymbol`  | `boolean` | no       | Using only currency codes (e.g. USD10 instead of $10)
 
 ### Global Configure
 
@@ -46,10 +47,10 @@ monetochka.globalConfig.throwOnError = true;
 
 ## Next steps
 
+- [x] Parameter for output only currency codes (e.g. `f(2000, 'RUB') -> 2 000 RUB`);
 - [ ] Separators format (thousands, lakh, wan);
 - [ ] Parameter for simple/extended currency symbols (e.g. `$` or `US$`), because a lot of currencies have several symbols;
 - [ ] Parameter for strict and loose precision (strict precision 2 should always returns `0.00` and not strict should be rounded to `0`). The same for si rounding;
-- [ ] Parameter for output only currency codes (e.g. `f(2000, 'RUB') -> 2 000 RUB`);
 - [ ] Format for negative values;
 - [ ] Method to add new currencies;
 - [ ] Method to manipulate si rounding chars (e.g. for i18n or `K` -> `k`);

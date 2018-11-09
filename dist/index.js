@@ -1083,13 +1083,13 @@ exports.globalConfig = {
     errorValue: '—',
 };
 exports.format = function (_a) {
-    var value = _a.value, currency = _a.currency, precision = _a.precision, si = _a.si, locale = _a.locale;
+    var value = _a.value, currency = _a.currency, precision = _a.precision, si = _a.si, locale = _a.locale, noSymbol = _a.noSymbol;
     try {
         // @ts-ignore
         if (Number.isNaN(value)) {
             throw new TypeError('Value is NaN');
         }
-        var symbol = symbols[currency] || currency;
+        var symbol = noSymbol ? currency : symbols[currency] || currency;
         var selectedLocale = locale || exports.globalConfig.defaultLocale || defaultLocales[currency] || 'en_US';
         var preset = void 0;
         if (locales[selectedLocale]) {

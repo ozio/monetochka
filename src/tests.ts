@@ -6,8 +6,8 @@ const testsItself = (exp: (expect: string, real: string) => void) => {
   exp('$10.00', monetochka.format({ value: 10, currency: 'USD' }));
   exp('10,00 $', monetochka.format({ value: 10, currency: 'USD', locale: 'ru' }));
   exp('$100,000.00', monetochka.format({ value: 100000, currency: 'USD' }));
-  exp('100,00 €', monetochka.format({ value: 100, currency: 'EUR' }));
-  exp('100.000,00 €', monetochka.format({ value: 100000, currency: 'EUR' }));
+  exp('€100.00', monetochka.format({ value: 100, currency: 'EUR' }));
+  exp('€100,000.00', monetochka.format({ value: 100000, currency: 'EUR' }));
   exp('10 000,00 ₽', monetochka.format({ value: 10000, currency: 'RUB' }));
   exp('12 345 678,00 kr', monetochka.format({ value: 12345678, currency: 'SEK' }));
   exp('12 345 678 kr', monetochka.format({ value: 12345678, currency: 'SEK', precision: 0 }));
@@ -15,6 +15,7 @@ const testsItself = (exp: (expect: string, real: string) => void) => {
   exp('50,6K kr', monetochka.format({ value: 50555, currency: 'SEK', si: 1 }));
   exp('₿1,000.00', monetochka.format({ value: 1000, currency: 'BTC' }));
   exp('₿-1,000.00', monetochka.format({ value: -1000, currency: 'BTC' }));
+  exp('BTC1,200', monetochka.format({ value: 1200, currency: 'BTC', noSymbol: true, precision: 0 }));
   exp('-10 000,00 ₽', monetochka.format({ value: -10000, currency: 'RUB' }));
   exp('¥5,000', monetochka.format({ value: 5000.21, currency: 'JPY' }));
   exp('15,24 kr', monetochka.f(15.241, 'SEK'));
