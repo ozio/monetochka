@@ -167,7 +167,7 @@ const symbols: {[key: string]: string} = {
   YER: 'ر.ي.‏',
   ZAR: 'R',
   ZMW: 'K',
-  BTC: '₿'
+  // BTC: '₿'
 };
 
 const defaultLocales: {[key: string]: string} = {
