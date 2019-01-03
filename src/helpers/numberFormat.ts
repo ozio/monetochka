@@ -1,6 +1,10 @@
 import { MLocaleSettings, MOptions } from '../index';
 
-const numberFormat = (siAmount: [number, string], options: MOptions, localeSettings: MLocaleSettings): string => {
+const numberFormat = (
+  siAmount: [number, string],
+  options: MOptions,
+  localeSettings: MLocaleSettings,
+): string => {
   let minimumFractionDigits = typeof localeSettings.f !== 'undefined'
     ? localeSettings.f
     : 0

@@ -42,6 +42,9 @@ const format = (
   }
 
   const currencyLocale = defaultLocales[currency] ? defaultLocales[currency] : 'en';
+
+  if (!mergedOptions.locale) mergedOptions.locale = currencyLocale;
+
   const currencySymbol = symbols[currency] && currencyLocale !== 'crypto' ? symbols[currency] : currency;
   const formatRules = locales[currencyLocale].h
     ? locales[locales[currencyLocale].h]
