@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "declaration": true,
-    "strictNullChecks": true,
-    "moduleResolution": "node",
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
+    "module": "es2015",
+    "target": "es2015",
     "noImplicitAny": true,
-    "target": "es5",
-    "lib": [
-      "dom",
-      "es7"
-    ]
-  }
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*"
+      ]
+    },
+    "declaration": true
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

@@ -1,11 +1,53 @@
 {
   "name": "monetochka",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "description": "Simple, fast and zero-dependency currency formatting library",
-  "main": "./dist/index.js",
+  "main": "monetochka.js",
+  "types": "monetochka.d.ts",
+  "devDependencies": {
+    "@types/jest": "23.3.11",
+    "dts-bundle-generator": "2.0.0",
+    "jest": "23.6.0",
+    "rollup": "1.0.1",
+    "rollup-plugin-sourcemaps": "0.4.2",
+    "rollup-plugin-typescript2": "0.18.1",
+    "ts-jest": "23.10.5",
+    "typescript": "3.2.2"
+  },
   "scripts": {
-    "build": "tsc",
-    "test": "node dist/tests.js"
+    "test": "jest",
+    "tdd": "jest --watchAll",
+    "start": "rollup -c rollup.config.js -w",
+    "build": "rollup -c rollup.config.js && npm run dts",
+    "dts": "dts-bundle-generator src/index.ts -o monetochka.d.ts",
+    "prepublish": "npm run jest && npm run"
+  },
+  "files": [
+    "LICENSE",
+    "monetochka.js",
+    "monetochka.d.ts"
+  ],
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json",
+        "diagnostics": ""
+      }
+    },
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      ".+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/tests/*.ts"
+    ],
+    "testEnvironment": "node"
   },
   "author": "Nikolay Solovyov <i@mr-ozio.ru>",
   "license": "MIT",
@@ -19,9 +61,5 @@
     "accounting",
     "fiat",
     "crypto"
-  ],
-  "devDependencies": {
-    "@types/node": "10.12.0",
-    "typescript": "3.1.3"
-  }
+  ]
 }
