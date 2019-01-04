@@ -5,6 +5,8 @@ const numberFormat = (
   options: MOptions,
   localeSettings: MLocaleSettings,
 ): string => {
+  const [amount, siPostfix] = siAmount;
+
   let minimumFractionDigits = typeof localeSettings.f !== 'undefined'
     ? localeSettings.f
     : 0
@@ -24,17 +26,17 @@ const numberFormat = (
       : options.fractionDigits
   ;
 
-  if (options.siRounding) {
+  if (options.siRounding && amount < 1000) {
     minimumFractionDigits = options.siPrecision;
     maximumFractionDigits = options.siPrecision;
   }
 
-  const localeString = siAmount[0].toLocaleString(options.locale, {
+  const localeString = amount.toLocaleString(options.locale, {
     minimumFractionDigits,
     maximumFractionDigits,
   });
 
-  return `${localeString}${siAmount[1]}`;
+  return `${localeString}${siPostfix}`;
 };
 
 export default numberFormat;
