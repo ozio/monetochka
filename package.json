@@ -1,8 +1,9 @@
 {
   "name": "monetochka",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple, fast and zero-dependency currency formatting library",
-  "main": "monetochka.js",
+  "main": "monetochka.cjs.js",
+  "module": "monetochka.esm.js",
   "types": "monetochka.d.ts",
   "devDependencies": {
     "@types/jest": "23.3.11",
@@ -24,7 +25,8 @@
   },
   "files": [
     "LICENSE",
-    "monetochka.js",
+    "monetochka.cjs.js",
+    "monetochka.esm.js",
     "monetochka.d.ts"
   ],
   "jest": {
