@@ -14,9 +14,9 @@ const defaultOptions: MOptions = {
   errorValue: '—',
 };
 
-const throwErr = (message: string, options: MOptions) => {
+const throwErr = (message: string, options: MOptions, e?: Error) => {
   if (options.throwOnError) {
-    throw new Error(message);
+    throw (e || new Error(message));
   }
 
   return options.errorValue;
@@ -51,9 +51,15 @@ const format = (
     : locales[currencyLocale]
   ;
 
-  const amountWithSI = siRound(amount, mergedOptions);
-  const formattedAmount = numberFormat(amountWithSI, mergedOptions, formatRules);
+  let amountWithSI;
+  let formattedAmount;
 
+  try {
+    amountWithSI = siRound(amount, mergedOptions);
+    formattedAmount = numberFormat(amountWithSI, mergedOptions, formatRules);
+  } catch (e) {
+    return throwErr(`Can't parse a value`, mergedOptions, e);
+  }
   return formatRules.t
     .replace('!', currencySymbol)
     .replace('@', formattedAmount)

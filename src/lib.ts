@@ -144,6 +144,7 @@ const locales: Record<string, MLocaleSettings> = {
   'en-NZ': { h: 'en' },
   'en-SG': { h: 'en' },
   'en-US': { h: 'en' },
+  'es': { g: '.', d: ',', f: 2, t: '@ !' },
   'es-AR': { g: '.', d: ',', f: 2, t: '! @' },
   'es-CL': { g: '.', d: ',', f: 0, t: '!@' },
   'es-CO': { g: '.', d: ',', f: 2, t: '! @' },
