@@ -41,8 +41,6 @@ test('Format with SI rounding', () => {
 });
 
 test('Format with SI rounding and custom units', () => {
-  // NOK
-
   const thousandsOfNorwegianKrones = format(499999.99, 'NOK', {
     siRounding: true,
     siPrecision: 0,
@@ -50,4 +48,10 @@ test('Format with SI rounding and custom units', () => {
   });
 
   expect(thousandsOfNorwegianKrones).toEqual('kr 500k')
+});
+
+test('Format latin numbering system', () => {
+  const egyptPoundsArabicLocale = format(500, 'EGP');
+
+  expect(egyptPoundsArabicLocale).toEqual('£ 500.00');
 });

@@ -1,6 +1,6 @@
 {
   "name": "monetochka",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Simple, fast and zero-dependency currency formatting library",
   "main": "monetochka.cjs.js",
   "module": "monetochka.esm.js",

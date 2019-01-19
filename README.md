@@ -9,7 +9,7 @@ npm install monetochka --save
 ```
 
 ```javascript
-import format from 'monetochka/format';
+import { format } from 'monetochka';
 
 format(10, 'USD'); // $10.00
 format(20000, 'RUB'); // 20 000,00 ₽

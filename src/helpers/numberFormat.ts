@@ -31,7 +31,7 @@ const numberFormat = (
     maximumFractionDigits = options.siPrecision;
   }
 
-  const localeString = amount.toLocaleString(options.locale, {
+  const localeString = amount.toLocaleString(`${options.locale}-u-nu-latn`, {
     minimumFractionDigits,
     maximumFractionDigits,
   });
