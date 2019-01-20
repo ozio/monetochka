@@ -21,7 +21,7 @@
     "start": "rollup -c rollup.config.js -w",
     "build": "rollup -c rollup.config.js && npm run dts",
     "dts": "dts-bundle-generator src/index.ts -o monetochka.d.ts",
-    "prepublish": "npm test && npm run build",
+    "prepublishOnly": "npm test && npm run build",
     "postpublish": "rm monetochka.*"
   },
   "files": [
